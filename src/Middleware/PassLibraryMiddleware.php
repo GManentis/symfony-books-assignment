@@ -14,13 +14,11 @@ use App\Repository\LibraryRepository;
 class PassLibraryMiddleware implements EventSubscriberInterface
 {
     private $libraryRepo;
-    private $urlGenerator;
     private $urlMatcher;
     private $routeNamesForValidation = ["app_book_index", "app_book_new", "app_book_show", "app_book_edit", "app_book_delete"];
 
-    public function __construct(UrlGeneratorInterface $urlGenerator, UrlMatcherInterface $urlMatcher, private LibraryRepository $libraryRepository)
+    public function __construct(UrlMatcherInterface $urlMatcher, LibraryRepository $libraryRepository)
     {
-        $this->urlGenerator = $urlGenerator;
         $this->urlMatcher = $urlMatcher;
         $this->libraryRepo = $libraryRepository;
     }
