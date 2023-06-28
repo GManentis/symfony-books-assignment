@@ -1,0 +1,41 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Library index{% endblock %}
+
+{% block body %}
+    <h1>Library index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>PhoneNumber</th>
+                <th>Address</th>
+                <th>SupervisorFirstname</th>
+                <th>SupervisorLastname</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for library in libraries %}
+            <tr>
+                <td>{{ library.id }}</td>
+                <td>{{ library.phoneNumber }}</td>
+                <td>{{ library.address }}</td>
+                <td>{{ library.supervisorFirstname }}</td>
+                <td>{{ library.supervisorLastname }}</td>
+                <td>
+                    <a href="{{ path('app_library_show', {'id': library.id}) }}">show</a>
+                    <a href="{{ path('app_library_edit', {'id': library.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="6">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_library_new') }}">Create new</a>
+{% endblock %}
