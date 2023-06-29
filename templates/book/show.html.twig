@@ -23,6 +23,10 @@
                 <th>Description</th>
                 <td>{{ book.description }}</td>
             </tr>
+            <tr>
+                <th>Already Rented</th>
+                <td>{{ book.rented ? "Yes" : "No" }}</td>
+            </tr>
         </tbody>
     </table>
 

@@ -32,6 +32,9 @@ class Book
     #[ORM\JoinColumn(nullable: false, onDelete: "CASCADE")]
     private ?Library $library = null;
 
+    #[ORM\Column]
+    private ?bool $rented = null;
+
     public function __construct($inputArray){
         if(!is_array($inputArray)){
             return;
@@ -102,6 +105,18 @@ class Book
     public function setLibrary(?Library $library): static
     {
         $this->library = $library;
+
+        return $this;
+    }
+
+    public function isRented(): ?bool
+    {
+        return $this->rented;
+    }
+
+    public function setRented(bool $rented): static
+    {
+        $this->rented = $rented;
 
         return $this;
     }
