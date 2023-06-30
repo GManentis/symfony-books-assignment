@@ -31,13 +31,7 @@ class Book
     #[ORM\OneToMany(mappedBy: 'book', targetEntity: BookLibrary::class)]
     private Collection $bookLibraries;
 
-    public function __construct($inputArray){
-        if(!is_array($inputArray)){
-            return;
-        }
-        foreach($inputArray as $key => $value){
-            $this->{$key} = $value;
-        }
+    public function __construct(){
         $this->bookLibraries = new ArrayCollection();
     }
 
