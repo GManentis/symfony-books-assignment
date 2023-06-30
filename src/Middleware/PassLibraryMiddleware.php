@@ -15,7 +15,7 @@ class PassLibraryMiddleware implements EventSubscriberInterface
 {
     private $libraryRepo;
     private $urlMatcher;
-    private $routeNamesForValidation = ["app_book_index", "app_book_new", "app_book_show", "app_book_edit", "app_book_delete"];
+    private $routeNamesForValidation = ["app_book_library_index", "app_book_library_new", "app_book_library_show", "app_book_library_edit", "app_book_library_delete"];
 
     public function __construct(UrlMatcherInterface $urlMatcher, LibraryRepository $libraryRepository)
     {

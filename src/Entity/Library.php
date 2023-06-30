@@ -27,12 +27,12 @@ class Library
     #[ORM\Column(length: 255)]
     private ?string $supervisorLastname = null;
 
-    #[ORM\OneToMany(mappedBy: 'library', targetEntity: Book::class, orphanRemoval: true)]
-    private Collection $books;
+    #[ORM\OneToMany(mappedBy: 'library', targetEntity: BookLibrary::class, orphanRemoval: true)]
+    private Collection $bookLibraries;
 
     public function __construct()
     {
-        $this->books = new ArrayCollection();
+        $this->bookLibraries = new ArrayCollection();
     }
 
 
@@ -90,33 +90,32 @@ class Library
     }
 
     /**
-     * @return Collection<int, Book>
+     * @return Collection<int, BookLibrary>
      */
-    public function getBooks(): Collection
+    public function getBookLibraries(): Collection
     {
-        return $this->books;
+        return $this->bookLibraries;
     }
 
-    public function addBook(Book $book): static
+    public function addBookLibrary(BookLibrary $bookLibrary): static
     {
-        if (!$this->books->contains($book)) {
-            $this->books->add($book);
-            $book->setLibrary($this);
+        if (!$this->bookLibraries->contains($bookLibrary)) {
+            $this->bookLibraries->add($bookLibrary);
+            $bookLibrary->setLibrary($this);
         }
 
         return $this;
     }
 
-    public function removeBook(Book $book): static
+    public function removeBookLibrary(BookLibrary $bookLibrary): static
     {
-        if ($this->books->removeElement($book)) {
+        if ($this->bookLibraries->removeElement($bookLibrary)) {
             // set the owning side to null (unless already changed)
-            if ($book->getLibrary() === $this) {
-                $book->setLibrary(null);
+            if ($bookLibrary->getLibrary() === $this) {
+                $bookLibrary->setLibrary(null);
             }
         }
 
         return $this;
     }
-
 }

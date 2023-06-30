@@ -12,7 +12,6 @@
                 <th>Title</th>
                 <th>Isbn</th>
                 <th>Description</th>
-                <th>Already Rented</th>
                 <th>actions</th>
             </tr>
         </thead>
@@ -23,10 +22,9 @@
                 <td>{{ book.title }}</td>
                 <td>{{ book.isbn }}</td>
                 <td>{{ book.description }}</td>
-                <td>{{ book.rented ? "Yes" : "No" }}</td>
                 <td>
-                    <a href="{{ path('app_book_show', {'id': book.id, library:library.id}) }}">show</a>
-                    <a href="{{ path('app_book_edit', {'id': book.id, library:library.id}) }}">edit</a>
+                    <a href="{{ path('app_book_show', {'id': book.id}) }}">show</a>
+                    <a href="{{ path('app_book_edit', {'id': book.id}) }}">edit</a>
                 </td>
             </tr>
         {% else %}
@@ -37,5 +35,5 @@
         </tbody>
     </table>
 
-    <a href="{{ path('app_book_new', {library: library.id}) }}">Create new</a>
+    <a href="{{ path('app_book_new') }}">Create new</a>
 {% endblock %}

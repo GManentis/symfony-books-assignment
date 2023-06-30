@@ -28,12 +28,8 @@ class Book
     #[ORM\JoinColumn(name: "author_id", referencedColumnName: "id", onDelete: "SET NULL")]
     private ?Author $author = null;
 
-    #[ORM\ManyToOne(inversedBy: 'books')]
-    #[ORM\JoinColumn(nullable: false, onDelete: "CASCADE")]
-    private ?Library $library = null;
-
-    #[ORM\Column]
-    private ?bool $rented = null;
+    #[ORM\OneToMany(mappedBy: 'book', targetEntity: BookLibrary::class)]
+    private Collection $bookLibraries;
 
     public function __construct($inputArray){
         if(!is_array($inputArray)){
@@ -42,6 +38,7 @@ class Book
         foreach($inputArray as $key => $value){
             $this->{$key} = $value;
         }
+        $this->bookLibraries = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -96,32 +93,5 @@ class Book
 
         return $this;
     }
-
-    public function getLibrary(): ?Library
-    {
-        return $this->library;
-    }
-
-    public function setLibrary(?Library $library): static
-    {
-        $this->library = $library;
-
-        return $this;
-    }
-
-    public function isRented(): ?bool
-    {
-        return $this->rented;
-    }
-
-    public function setRented(bool $rented): static
-    {
-        $this->rented = $rented;
-
-        return $this;
-    }
-
-
-
 
 }
